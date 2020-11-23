@@ -10,6 +10,22 @@ chmod +x DataSunrise_Suite_6_3_1_31046.linux.64bit.run
 
 echo "chmod OK" >> /home/test.txt
 
-./DataSunrise_Suite_6_3_1_31046.linux.64bit.run install --remote-config -v --dictionary-type postgresql --dictionary-host $2 --dictionary-port 5432 --dictionary-database datasunrise_db --dictionary-login $3 --dictionary-password $4 --server-name katya --server-host $5 --server-port 11000
+./DataSunrise_Suite_6_3_1_31046.linux.64bit.run --target tmp install -f --no-password --no-start
 
 echo "DS install OK" >> /home/test.txt
+
+cd /opt/datasunrise
+
+AppBackendService CLEAN_LOCAL_SETTINGS \
+DICTIONARY_TYPE=$2 \
+DICTIONARY_HOST=$3 \
+DICTIONARY_PORT=$4 \
+DICTIONARY_DB_NAME=$5 \
+DICTIONARY_LOGIN=$6 \
+DICTIONARY_PASS=$7 \
+FIREWALL_SERVER_NAME=$8 \
+FIREWALL_SERVER_HOST=`hostname` \
+FIREWALL_SERVER_BACKEND_PORT=11000 \
+FIREWALL_SERVER_CORE_PORT=11001 \
+FIREWALL_SERVER_BACKEND_HTTPS=1 \
+FIREWALL_SERVER_CORE_HTTPS=1
