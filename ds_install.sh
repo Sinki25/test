@@ -16,7 +16,7 @@ echo "DS install OK" >> /home/test.txt
 
 cd /opt/datasunrise
 
-AppBackendService CLEAN_LOCAL_SETTINGS \
+./AppBackendService CLEAN_LOCAL_SETTINGS \
 DICTIONARY_TYPE=$2 \
 DICTIONARY_HOST=$3 \
 DICTIONARY_PORT=$4 \
