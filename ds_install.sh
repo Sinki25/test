@@ -35,3 +35,5 @@ FIREWALL_SERVER_CORE_HTTPS=1
 echo $? >> /home/test.txt
 
 echo "Exit code after dictionary configuration" >> /home/test.txt
+
+sudo service datasunrise start
