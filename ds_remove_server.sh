@@ -1,7 +1,3 @@
-sudo yum install postgresql -y
-
-echo "Postgresql was successfully started" >> /home/test.txt
-
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 
 sudo sh -c 'echo -e "[azure-cli] \
@@ -33,32 +29,34 @@ touch /tmp/ds_servers.txt
 
 ./executecommand.sh showDsServers | grep 11000 > /tmp/ds_servers.txt
 
-name_del=()
+ds_server_name_del=()
 
 for i in {0..$1}
 
 do
 
-hostname=''
+    hostname=''
 
-hostname=$(az vmss list-instances -g katya-group -n vmScaleSet_0 | jq '.[i].osProfile.computerName')
+    hostname=$(az vmss list-instances -g katya-group -n vmScaleSet_0 | jq '.[i].osProfile.computerName')
 
-if [ "$hostname" != null]; then
+    if [ "$hostname" != null]; then
 
-hostname=`hostname | tr -d \"`
+        hostname=`hostname | tr -d \"`
 
-while IFS='' read -r DS_LINE || [[ -n "$DS_LINE" ]]; do
-    IFS=':'; ARG=($DS_LINE); unset IFS;
+        while IFS='' read -r DS_LINE || [[ -n "$DS_LINE" ]]; do
+        
+            IFS=':'; ARG=($DS_LINE); unset IFS;
     
-    CK_DS_NAME=`echo ${ARG[0]} | tr -d '[:space:]'`
-    CK_DS_HOST_NAME=`echo ${ARG[1]} | tr -d '[:space:]'`
+            CK_DS_NAME=`echo ${ARG[0]} | tr -d '[:space:]'`
+            CK_DS_HOST_NAME=`echo ${ARG[1]} | tr -d '[:space:]'`
+            
     
-    if [ "$CK_DS_HOST_NAME" == "$hostname" ]; then
-            continue
-    else 
-      name_del+=($CK_DS_NAME);
-      continue
-    fi
+            if [ "$CK_DS_HOST_NAME" == "$hostname" ]; then
+                continue
+            else 
+                name_del+=($CK_DS_NAME);
+                continue
+            fi
 
 done < /tmp/ds_servers.txt
 
