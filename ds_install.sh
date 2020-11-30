@@ -39,5 +39,3 @@ echo "Exit code after dictionary configuration" >> /home/test.txt
 sudo service datasunrise start
 
 echo "Datasunrise Suite was successfully started" >> /home/test.txt
-
-sudo yum install postgresql -y
