@@ -83,11 +83,15 @@ cd /opt/datasunrise/cmdline
 
 ds_servers_count=`wc -l < /tmp/ds_servers.txt`
 
+echo "ds_servers_count=$ds_servers_count" >> /home/test.txt
+
 ds_server_name_del=()
 
 ds_server_name_cont=()
 
 vm_count=$((${12}-1))
+
+echo "vm_count=$vm_count" >> /home/test.txt
 
 for i in {0..$ds_servers_count}
 
@@ -100,17 +104,27 @@ do
         CK_DS_NAME=`echo ${ARG[0]} | tr -d '[:space:]'`
         CK_DS_HOST_NAME=`echo ${ARG[1]} | tr -d '[:space:]'`
         
+        echo "CK_DS_NAME=$CK_DS_NAME" >> /home/test.txt
+        
+        echo "CK_DS_HOST_NAME=$CK_DS_HOST_NAME" >> /home/test.txt
+        
         for j in {0..$vm_count}
 
         do
 
             hostname_scale=$(az vmss list-instances -g ${13} -n ${14} | jq ".[$j].osProfile.computerName")
+            
+            echo "hostname_scale=$hostname_scale" >> /home/test.txt
 
             hostname_scale="${hostname_scale//\"}"
+            
+            echo "hostname_scale=$hostname_scale" >> /home/test.txt
 
             if [ "$hostname_scale" == "$CK_DS_HOST_NAME" ]; then
                 
                 ds_server_name_cont+=($CK_DS_NAME);
+                
+                echo "CK_DS_NAME_cont=$CK_DS_NAME" >> /home/test.txt
                     
             else 
                 if [[ " ${ds_server_name_del[@]} " =~ " ${CK_DS_NAME} " ]]; then
@@ -119,6 +133,8 @@ do
                         
                 else
                     ds_server_name_del+=($CK_DS_NAME);
+                    
+                    echo "CK_DS_NAME_del=$CK_DS_NAME" >> /home/test.txt
                     
                 fi
             fi
@@ -131,10 +147,16 @@ done
 
 if [ ${#ds_server_name_cont[@]} != ${#ds_server_name_del[@]} ]; then
 
+    echo "ds_server_name_cont_count=${#ds_server_name_cont[@]}" >> /home/test.txt
+    
+    echo "ds_server_name_del_count=${#ds_server_name_del[@]}" >> /home/test.txt
+
     for cont in ${ds_server_name_cont[@]}
     do
         
         ds_server_name_del=("${ds_server_name_del[@]/$cont}") 
+        
+        echo "cont=$cont" >> /home/test.txt
 
     done
   
@@ -143,6 +165,8 @@ if [ ${#ds_server_name_cont[@]} != ${#ds_server_name_del[@]} ]; then
     do 
 
         ./executecommand.sh delDsServer -name $del
+        
+        echo "del=$del" >> /home/test.txt
     
     done
 fi
