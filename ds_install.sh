@@ -112,7 +112,13 @@ do
 
         do
 
+            echo "resource_group=${13}" >> /home/test.txt
+            echo "resource_group=${13}" >> /home/test.txt
+            echo "j=$j" >> /home/test.txt
+            
             hostname_scale=$(az vmss list-instances -g ${13} -n ${14} | jq ".[$j].osProfile.computerName")
+            
+            echo "hostname_scale=`$(az vmss list-instances -g ${13} -n ${14} | jq ".[$j].osProfile.computerName")`" >> /home/test.txt
             
             echo "hostname_scale=$hostname_scale" >> /home/test.txt
 
