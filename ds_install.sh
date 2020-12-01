@@ -108,7 +108,7 @@ do
         
         echo "CK_DS_HOST_NAME=$CK_DS_HOST_NAME" >> /home/test.txt
         
-        for j in {0..$vm_count}
+        for ((j=0; j<=$vm_count; j++))
 
         do
 
