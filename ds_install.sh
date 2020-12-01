@@ -121,19 +121,13 @@ done
 
 if [ ${#ds_server_name_cont[@]} != ${#ds_server_name_del[@]} ]; then
 
-    for i in {1..${#ds_server_name_cont[@]}}
-
-    do 
-
-        for cont in ${ds_server_name_cont[@]}
-        do
+    for cont in ${ds_server_name_cont[@]}
+    do
         
-            ds_server_name_del=("${ds_server_name_del[@]/$cont}") 
+        ds_server_name_del=("${ds_server_name_del[@]/$cont}") 
 
-        done
-    
-    done 
-
+    done
+  
     for del in ${ds_server_name_del[@]}
 
     do 
