@@ -90,7 +90,7 @@ do
         CK_DS_NAME=`echo ${ARG[0]} | tr -d '[:space:]'`
         CK_DS_HOST_NAME=`echo ${ARG[1]} | tr -d '[:space:]'`
         
-        for j in {0..${12}}
+        for j in {0..(${12}-1)}
 
         do
 
