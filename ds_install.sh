@@ -53,7 +53,7 @@ sudo yum install azure-cli -y
 
 echo "Azure CLI was successfully installed" >> /home/test.txt
 
-az login -u azuretest@datasunrise.com -p Armor-409
+az login -u $9 -p ${10}
 
 echo "Azure successful login" >> /home/test.txt
 
@@ -69,7 +69,7 @@ touch /tmp/ds_servers.txt
 
 cd /opt/datasunrise/cmdline
 
-./executecommand.sh connect -host `hostname` -port 11000 -login admin -password $1
+./executecommand.sh connect -host `hostname` -port 11000 -login admin -password ${11}
 
 ./executecommand.sh showDsServers | grep 11000 > /tmp/ds_servers.txt
 
@@ -90,11 +90,11 @@ do
         CK_DS_NAME=`echo ${ARG[0]} | tr -d '[:space:]'`
         CK_DS_HOST_NAME=`echo ${ARG[1]} | tr -d '[:space:]'`
         
-        for j in {0..$2}
+        for j in {0..${12}}
 
         do
 
-            hostname_scale=$(az vmss list-instances -g $3 -n $4 | jq ".[$j].osProfile.computerName")
+            hostname_scale=$(az vmss list-instances -g ${13} -n ${14} | jq ".[$j].osProfile.computerName")
 
             hostname_scale="${hostname_scale//\"}"
 
