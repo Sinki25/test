@@ -87,6 +87,8 @@ ds_server_name_del=()
 
 ds_server_name_cont=()
 
+vm_count=$((${12}-1))
+
 for i in {0..$ds_servers_count}
 
 do
@@ -98,7 +100,7 @@ do
         CK_DS_NAME=`echo ${ARG[0]} | tr -d '[:space:]'`
         CK_DS_HOST_NAME=`echo ${ARG[1]} | tr -d '[:space:]'`
         
-        for j in {0..(${12}-1)}
+        for j in {0..$vm_count}
 
         do
 
