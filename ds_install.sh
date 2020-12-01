@@ -32,6 +32,14 @@ FIREWALL_SERVER_CORE_PORT=11001 \
 FIREWALL_SERVER_BACKEND_HTTPS=1 \
 FIREWALL_SERVER_CORE_HTTPS=1
 
+RETVAL=$?
+
+if [ "$RETVAL" == "93" ]; then
+
+./AppBackendService SET_ADMIN_PASSWORD=${11}
+
+fi
+
 echo $? >> /home/test.txt
 
 echo "Exit code after dictionary configuration" >> /home/test.txt
