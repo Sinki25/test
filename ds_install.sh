@@ -20,9 +20,9 @@ curl https://packages.microsoft.com/config/rhel/8/prod.repo > /etc/yum.repos.d/m
 
 sudo yum remove unixODBC-utf16 unixODBC-utf16-devel 
 
-sudo ACCEPT_EULA=Y yum install msodbcsql17
+sudo ACCEPT_EULA=Y yum install msodbcsql17 -y
 
-sudo yum install unixODBC-devel
+sudo yum install unixODBC-devel -y
 
 cd /opt/datasunrise
 
