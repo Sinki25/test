@@ -16,6 +16,14 @@ echo $? >> /home/test.txt
 
 echo "Exit code after installation" >> /home/test.txt
 
+curl https://packages.microsoft.com/config/rhel/8/prod.repo > /etc/yum.repos.d/mssql-release.repo
+
+sudo yum remove unixODBC-utf16 unixODBC-utf16-devel 
+
+sudo ACCEPT_EULA=Y yum install msodbcsql17
+
+sudo yum install unixODBC-devel
+
 cd /opt/datasunrise
 
 ./AppBackendService CLEAN_LOCAL_SETTINGS \
