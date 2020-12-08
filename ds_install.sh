@@ -52,9 +52,9 @@ fi
 
 ./AppBackendService CHANGE_SETTINGS \
 AuditDatabaseType=$2 \
-AuditDatabaseHost=${15} \
+AuditDatabaseHost=$3 \
 AuditDatabasePort=$4 \
-AuditDatabaseName=${16} \
+AuditDatabaseName=${15} \
 AuditLogin=$6 \
 AuditPassword=$7 \
 
