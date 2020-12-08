@@ -50,6 +50,10 @@ if [ "$RETVAL" == "93" ]; then
 
 fi
 
+echo $? >> /home/test.txt
+
+echo "Exit code after dictionary configuration" >> /home/test.txt
+
 ./AppBackendService CHANGE_SETTINGS \
 AuditDatabaseType=$2 \
 AuditDatabaseHost=$3 \
@@ -60,7 +64,7 @@ AuditPassword=$7 \
 
 echo $? >> /home/test.txt
 
-echo "Exit code after dictionary configuration" >> /home/test.txt
+echo "Exit code after audit configuration" >> /home/test.txt
 
 sudo service datasunrise start
 
