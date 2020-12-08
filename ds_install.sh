@@ -55,7 +55,7 @@ echo $? >> /home/test.txt
 echo "Exit code after dictionary configuration" >> /home/test.txt
 
 ./AppBackendService CHANGE_SETTINGS \
-AuditDatabaseType=$2 \
+AuditDatabaseType=1 \
 AuditDatabaseHost=$3 \
 AuditDatabasePort=$4 \
 AuditDatabaseName=${15} \
