@@ -16,15 +16,15 @@ echo $? >> /home/test.txt
 
 echo "Exit code after installation" >> /home/test.txt
 
-curl https://packages.microsoft.com/config/rhel/8/prod.repo > /etc/yum.repos.d/mssql-release.repo
+#curl https://packages.microsoft.com/config/rhel/8/prod.repo > /etc/yum.repos.d/mssql-release.repo
 
-sudo yum remove unixODBC-utf16 unixODBC-utf16-devel 
+#sudo yum remove unixODBC-utf16 unixODBC-utf16-devel 
 
-sudo ACCEPT_EULA=Y yum install msodbcsql17 -y
+#sudo ACCEPT_EULA=Y yum install msodbcsql17 -y
 
-sudo yum install unixODBC-devel -y
+#sudo yum install unixODBC-devel -y
 
-echo "mssql driver was updated successfully" >> /home/test.txt
+#echo "mssql driver was updated successfully" >> /home/test.txt
 
 cd /opt/datasunrise
 
