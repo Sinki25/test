@@ -50,6 +50,14 @@ if [ "$RETVAL" == "93" ]; then
 
 fi
 
+./AppBackendService CHANGE_SETTINGS \
+AuditDatabaseType=$2 \
+AuditDatabaseHost=${15} \
+AuditDatabasePort=$4 \
+AuditDatabaseName=${16} \
+AuditLogin=$6 \
+AuditPassword=$7 \
+
 echo $? >> /home/test.txt
 
 echo "Exit code after dictionary configuration" >> /home/test.txt
