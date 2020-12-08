@@ -24,6 +24,8 @@ sudo ACCEPT_EULA=Y yum install msodbcsql17 -y
 
 sudo yum install unixODBC-devel -y
 
+echo "mssql driver was updated successfully" >> /home/test.txt
+
 cd /opt/datasunrise
 
 ./AppBackendService CLEAN_LOCAL_SETTINGS \
