@@ -31,11 +31,11 @@ wget -O DataSunrise_Suite.linux.64bit.run $3
 
 echo "DS download OK" >> /home/test.txt
 
-chmod +x DataSunrise_Suite_6_3_1_31046.linux.64bit.run
+chmod +x DataSunrise_Suite.linux.64bit.run
 
 echo "chmod OK" >> /home/test.txt
 
-./DataSunrise_Suite_6_3_1_31046.linux.64bit.run --target tmp install -f --no-password --no-start
+./DataSunrise_Suite.linux.64bit.run --target tmp install -f --no-password --no-start
 
 echo $? >> /home/test.txt
 
@@ -99,6 +99,6 @@ echo "Remove odd servers in case there are ones" >> /home/test.txt
 
 file_to_execute="./${13}"
 
-$file_to_execute ${14} ${15} ${16} ${17}
+$file_to_execute ${11} ${14} ${15} ${16}
 
 echo "The odd servers were successfully removed" >> /home/test.txt
