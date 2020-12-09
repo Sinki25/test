@@ -2,6 +2,8 @@ touch /tmp/ds_servers.txt
 
 cd /opt/datasunrise/cmdline
 
+echo "./executecommand.sh connect -host `hostname` -port 11000 -login admin -password $1"
+
 ./executecommand.sh connect -host `hostname` -port 11000 -login admin -password $1
 
 echo $? >> /home/test.txt 
