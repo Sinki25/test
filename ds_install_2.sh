@@ -11,7 +11,7 @@ sudo yum install azure-cli -y
 
 echo "Azure CLI was successfully installed" >> /home/test.txt
 
-az login -u $9 -p ${10}
+az login -u $1 -p $2
 
 echo "Azure successful login" >> /home/test.txt
 
@@ -27,7 +27,7 @@ sudo yum install unixODBC -y
 
 echo "unixODBC install OK" >> /home/test.txt 
 
-wget -O DataSunrise_Suite_6_3_1_31046.linux.64bit.run $1
+wget -O DataSunrise_Suite.linux.64bit.run $3
 
 echo "DS download OK" >> /home/test.txt
 
@@ -54,13 +54,13 @@ echo "Exit code after installation" >> /home/test.txt
 cd /opt/datasunrise
 
 ./AppBackendService CLEAN_LOCAL_SETTINGS \
-DICTIONARY_TYPE=$2 \
-DICTIONARY_HOST=$3 \
-DICTIONARY_PORT=$4 \
-DICTIONARY_DB_NAME=$5 \
-DICTIONARY_LOGIN=$6 \
-DICTIONARY_PASS=$7 \
-FIREWALL_SERVER_NAME=$8'-'`hostname` \
+DICTIONARY_TYPE=$4 \
+DICTIONARY_HOST=$5 \
+DICTIONARY_PORT=$6 \
+DICTIONARY_DB_NAME=$7 \
+DICTIONARY_LOGIN=$8 \
+DICTIONARY_PASS=$9 \
+FIREWALL_SERVER_NAME=${10}'-'`hostname` \
 FIREWALL_SERVER_HOST=`hostname` \
 FIREWALL_SERVER_BACKEND_PORT=11000 \
 FIREWALL_SERVER_CORE_PORT=11001 \
@@ -81,11 +81,11 @@ echo "Exit code after dictionary configuration" >> /home/test.txt
 
 ./AppBackendService CHANGE_SETTINGS \
 AuditDatabaseType=1 \
-AuditDatabaseHost=$3 \
-AuditDatabasePort=$4 \
-AuditDatabaseName=${15} \
-AuditLogin=$6 \
-AuditPassword=$7 \
+AuditDatabaseHost=$5 \
+AuditDatabasePort=$6 \
+AuditDatabaseName=${12} \
+AuditLogin=$8 \
+AuditPassword=$9 \
 
 echo $? >> /home/test.txt
 
@@ -94,3 +94,9 @@ echo "Exit code after audit configuration" >> /home/test.txt
 sudo service datasunrise start
 
 echo "Datasunrise Suite was successfully started" >> /home/test.txt
+
+echo "Remove odd servers in case there are ones" >> /home/test.txt
+
+${13} ${14} ${15} ${16} ${17}
+
+echo "The odd servers were successfully removed" >> /home/test.txt
