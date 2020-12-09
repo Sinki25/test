@@ -2,7 +2,7 @@ touch /tmp/ds_servers.txt
 
 cd /opt/datasunrise/cmdline
 
-./executecommand.sh connect -host `hostname` -port 11000 -login admin -password ${11}
+./executecommand.sh connect -host `hostname` -port 11000 -login admin -password $1
 
 ./executecommand.sh showDsServers | grep 11000 > /tmp/ds_servers.txt
 
@@ -14,7 +14,7 @@ ds_server_name_del=()
 
 ds_server_name_cont=()
 
-vm_count=$((${12}-1)
+vm_count=$(($2-1)
 echo "vm_count=$vm_count" >> /home/test.txt
 for i in {0..$ds_servers_count}
 do
@@ -33,13 +33,13 @@ do
 
         do
 
-            echo "resource_group=${13}" >> /home/test.txt
-            echo "resource_group=${13}" >> /home/test.txt
+            echo "resource_group=$3" >> /home/test.txt
+            echo "resource_group=$3" >> /home/test.txt
             echo "j=$j" >> /home/test.txt
             
-            hostname_scale=$(az vmss list-instances -g ${13} -n ${14} | jq ".[$j].osProfile.computerName")
+            hostname_scale=$(az vmss list-instances -g $3 -n $4 | jq ".[$j].osProfile.computerName")
             
-            echo "hostname_scale=`$(az vmss list-instances -g ${13} -n ${14} | jq ".[$j].osProfile.computerName")`" >> /home/test.txt
+            echo "hostname_scale=`$(az vmss list-instances -g $3 -n $4 | jq ".[$j].osProfile.computerName")`" >> /home/test.txt
             
             echo "hostname_scale=$hostname_scale" >> /home/test.txt
 
