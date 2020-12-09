@@ -97,6 +97,8 @@ echo "Datasunrise Suite was successfully started" >> /home/test.txt
 
 echo "Remove odd servers in case there are ones" >> /home/test.txt
 
-${13} ${14} ${15} ${16} ${17}
+file_to_execute="./${13}"
+
+$file_to_execute ${14} ${15} ${16} ${17}
 
 echo "The odd servers were successfully removed" >> /home/test.txt
