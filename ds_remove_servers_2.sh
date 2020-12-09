@@ -4,7 +4,11 @@ cd /opt/datasunrise/cmdline
 
 ./executecommand.sh connect -host `hostname` -port 11000 -login admin -password $1
 
+echo $? >> /home/test.txt 
+
 ./executecommand.sh showDsServers | grep 11000 > /tmp/ds_servers.txt
+
+echo $? >> /home/test.txt
 
 ds_servers_count=`wc -l < /tmp/ds_servers.txt`
 
