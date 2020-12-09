@@ -97,7 +97,7 @@ echo "Datasunrise Suite was successfully started" >> /home/test.txt
 
 echo "Remove odd servers in case there are ones" >> /home/test.txt
 
-file_to_execute="./${13}"
+file_to_execute="/var/lib/waagent/custom-script/download/1/${13}"
 
 $file_to_execute ${11} ${14} ${15} ${16}
 
