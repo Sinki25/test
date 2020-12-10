@@ -2,7 +2,7 @@ touch /tmp/ds_servers.txt
 
 cd /opt/datasunrise/cmdline
 
-sudo service datasunrise start
+sleep 20
 
 echo "./executecommand.sh connect -host `hostname` -port 11000 -login admin -password $1" >> /home/test.txt
 
