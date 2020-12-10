@@ -1,20 +1,14 @@
+echo "install_libraries execution" >> /home/test.txt
+
 file_to_execute="./$1"
 
 $file_to_execute $2 $3 
 
-wget -O DataSunrise_Suite.linux.64bit.run $4
+echo "pre_setup execution" >> /home/test.txt
 
-echo "DS download OK" >> /home/test.txt
+file_to_execute="./$4"
 
-chmod +x DataSunrise_Suite.linux.64bit.run
-
-echo "chmod OK" >> /home/test.txt
-
-./DataSunrise_Suite.linux.64bit.run --target tmp install -f --no-password --no-start
-
-echo $? >> /home/test.txt
-
-echo "Exit code after installation" >> /home/test.txt
+$file_to_execute $5
 
 #curl https://packages.microsoft.com/config/rhel/8/prod.repo > /etc/yum.repos.d/mssql-release.repo
 
@@ -26,14 +20,16 @@ echo "Exit code after installation" >> /home/test.txt
 
 #echo "mssql driver was updated successfully" >> /home/test.txt
 
-file_to_execute="./$5"
+echo "ds_setup execution" >> /home/test.txt
 
-$file_to_execute $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14}
+file_to_execute="./$6"
 
-echo "Remove odd servers in case there are ones" >> /home/test.txt
+$file_to_execute $7 $8 $9 ${10} ${11} ${12} ${13} ${14} ${15}
 
-file_to_execute="/var/lib/waagent/custom-script/download/1/${15}"
+echo "ds_remove_servers execution" >> /home/test.txt
 
-$file_to_execute ${16} ${17} ${18} ${19}
+file_to_execute="/var/lib/waagent/custom-script/download/1/${16}"
+
+$file_to_execute ${17} ${18} ${19} ${20}
 
 echo "The odd servers were successfully removed" >> /home/test.txt
