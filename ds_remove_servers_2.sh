@@ -6,7 +6,7 @@ echo "./executecommand.sh connect -host `hostname` -port 11000 -login admin -pas
 
 echo "exit code after connection attempt" >> /home/test.txt
 
-./executecommand.sh connect -host `hostname` -port 11000 -login admin -password $1
+./executeCommand.sh connect -host `hostname` -port 11000 -login admin -password $1
 
 echo $? >> /home/test.txt 
 
