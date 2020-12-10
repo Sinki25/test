@@ -20,7 +20,7 @@ ds_server_name_del=()
 
 ds_server_name_cont=()
 
-vm_count=$(($2-1)
+vm_count=$(($2-1))
 echo "vm_count=$vm_count" >> /home/test.txt
 for i in {0..$ds_servers_count}
 do
