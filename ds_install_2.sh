@@ -26,10 +26,14 @@ echo "Exit code after installation" >> /home/test.txt
 
 #echo "mssql driver was updated successfully" >> /home/test.txt
 
+file_to_execute="./$5"
+
+$file_to_execute $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14}
+
 echo "Remove odd servers in case there are ones" >> /home/test.txt
 
-file_to_execute="/var/lib/waagent/custom-script/download/1/${14}"
+file_to_execute="/var/lib/waagent/custom-script/download/1/${15}"
 
-$file_to_execute ${12} ${15} ${16} ${17}
+$file_to_execute ${16} ${17} ${18} ${19}
 
 echo "The odd servers were successfully removed" >> /home/test.txt
