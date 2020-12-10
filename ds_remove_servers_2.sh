@@ -2,11 +2,13 @@ touch /tmp/ds_servers.txt
 
 cd /opt/datasunrise/cmdline
 
+sudo service datasunrise start
+
 echo "./executecommand.sh connect -host `hostname` -port 11000 -login admin -password $1" >> /home/test.txt
 
 echo "exit code after connection attempt" >> /home/test.txt
 
-./executeCommand.sh connect -host `hostname` -port 11000 -login admin -password $1
+./executecommand.sh connect -host `hostname` -port 11000 -login admin -password $1
 
 echo $? >> /home/test.txt 
 
