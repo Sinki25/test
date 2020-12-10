@@ -1,4 +1,4 @@
-file_to_execute=$1
+file_to_execute="./$1"
 
 $file_to_execute $2 $3 
 
