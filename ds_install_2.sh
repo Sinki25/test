@@ -1,4 +1,8 @@
-wget -O DataSunrise_Suite.linux.64bit.run $3
+file_to_execute=$1
+
+$file_to_execute $2 $3 
+
+wget -O DataSunrise_Suite.linux.64bit.run $4
 
 echo "DS download OK" >> /home/test.txt
 
@@ -25,13 +29,13 @@ echo "Exit code after installation" >> /home/test.txt
 cd /opt/datasunrise
 
 ./AppBackendService CLEAN_LOCAL_SETTINGS \
-DICTIONARY_TYPE=$4 \
-DICTIONARY_HOST=$5 \
-DICTIONARY_PORT=$6 \
-DICTIONARY_DB_NAME=$7 \
-DICTIONARY_LOGIN=$8 \
-DICTIONARY_PASS=$9 \
-FIREWALL_SERVER_NAME=${10}'-'`hostname` \
+DICTIONARY_TYPE=$5 \
+DICTIONARY_HOST=$6 \
+DICTIONARY_PORT=$7 \
+DICTIONARY_DB_NAME=$8 \
+DICTIONARY_LOGIN=$9 \
+DICTIONARY_PASS=${10} \
+FIREWALL_SERVER_NAME=${11}'-'`hostname` \
 FIREWALL_SERVER_HOST=`hostname` \
 FIREWALL_SERVER_BACKEND_PORT=11000 \
 FIREWALL_SERVER_CORE_PORT=11001 \
@@ -42,7 +46,7 @@ RETVAL=$?
 
 if [ "$RETVAL" == "93" ]; then
 
-./AppBackendService SET_ADMIN_PASSWORD=${11}
+./AppBackendService SET_ADMIN_PASSWORD=${12}
 
 fi
 
@@ -52,11 +56,11 @@ echo "Exit code after dictionary configuration" >> /home/test.txt
 
 ./AppBackendService CHANGE_SETTINGS \
 AuditDatabaseType=1 \
-AuditDatabaseHost=$5 \
-AuditDatabasePort=$6 \
-AuditDatabaseName=${12} \
-AuditLogin=$8 \
-AuditPassword=$9 \
+AuditDatabaseHost=$6 \
+AuditDatabasePort=$7 \
+AuditDatabaseName=${13} \
+AuditLogin=$9 \
+AuditPassword=${10} \
 
 echo $? >> /home/test.txt
 
@@ -68,8 +72,8 @@ echo "Datasunrise Suite was successfully started" >> /home/test.txt
 
 echo "Remove odd servers in case there are ones" >> /home/test.txt
 
-file_to_execute="/var/lib/waagent/custom-script/download/1/${13}"
+file_to_execute="/var/lib/waagent/custom-script/download/1/${14}"
 
-$file_to_execute ${11} ${14} ${15} ${16}
+$file_to_execute ${12} ${15} ${16} ${17}
 
 echo "The odd servers were successfully removed" >> /home/test.txt
