@@ -1,13 +1,13 @@
-wget -O DataSunrise_Suite.linux.64bit.run $1
+install_product() {
 
-echo "DS download OK" >> /home/test.txt
+  wget -O DataSunrise_Suite.linux.64bit.run $1
 
-chmod +x DataSunrise_Suite.linux.64bit.run
+  echo "DS download OK" >> /home/test.txt
 
-echo "chmod OK" >> /home/test.txt
+  chmod +x DataSunrise_Suite.linux.64bit.run
 
-./DataSunrise_Suite.linux.64bit.run --target tmp install -f --no-password --no-start
+  echo "chmod OK" >> /home/test.txt
 
-echo $? >> /home/test.txt
-
-echo "Exit code after installation" >> /home/test.txt
+  ./DataSunrise_Suite.linux.64bit.run --target tmp install -f --no-password --no-start
+  
+}
