@@ -1,5 +1,3 @@
-touch /tmp/ds_servers.txt
-
 #sudo datasunrise service start
 
 ds_connect() {
@@ -15,6 +13,8 @@ ds_connect() {
 }
 
 ds_showservers() {
+
+    touch /tmp/ds_servers.txt
 
     cd /opt/datasunrise/cmdline
 
