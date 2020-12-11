@@ -10,7 +10,13 @@ echo "pre_setup execution" >> /home/test.txt
 
 file_to_execute="./$4"
 
-$file_to_execute $5
+source $file_to_execute 
+
+install_product $5
+
+echo $? >> /home/test.txt
+
+echo "Exit code after installation" >> /home/test.txt
 
 #curl https://packages.microsoft.com/config/rhel/8/prod.repo > /etc/yum.repos.d/mssql-release.repo
 
