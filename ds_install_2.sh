@@ -62,6 +62,22 @@ echo "ds_remove_servers execution" >> /home/test.txt
 
 file_to_execute="/var/lib/waagent/custom-script/download/1/${16}"
 
-$file_to_execute ${17} ${18} ${19} ${20}
+source $file_to_execute 
+
+echo "exit code after connection attempt" >> /home/test.txt
+
+ds_connect ${14} 
+
+echo $? >> /home/test.txt 
+
+echo "exit code after showDsServers" >> /home/test.txt
+
+ds_showservers 
+
+echo $? >> /home/test.txt
+
+get_ds_servers_list ${17} ${18} ${19}
+
+remove_odd_servers
 
 echo "The odd servers were successfully removed" >> /home/test.txt
