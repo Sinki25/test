@@ -1,3 +1,5 @@
+echo "Datasunrise installation script has been started"
+
 echo "install_libraries execution" >> /home/test.txt
 
 file_to_execute="./$1"
@@ -24,7 +26,31 @@ echo "ds_setup execution" >> /home/test.txt
 
 file_to_execute="./$6"
 
-$file_to_execute $7 $8 $9 ${10} ${11} ${12} ${13} ${14} ${15}
+source $file_to_execute 
+
+resetDict $7 $8 $9 ${10} ${11} ${12} ${13}
+
+RETVAL=$?
+
+echo $? >> /home/test.txt
+
+echo "Exit code after dictionary configuration" >> /home/test.txt
+
+if [ "$RETVAL" == "93" ]; then
+
+  resetAdminPassword ${14}
+
+fi
+
+resetAudit $8 $9 ${15} ${11} ${12}
+
+echo $? >> /home/test.txt
+
+echo "Exit code after audit configuration" >> /home/test.txt
+
+sudo service datasunrise start
+
+echo "Datasunrise Suite was successfully started" >> /home/test.txt
 
 echo "ds_remove_servers execution" >> /home/test.txt
 
