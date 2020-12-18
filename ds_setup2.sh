@@ -37,3 +37,9 @@ cd /opt/datasunrise
   AuditPassword=$5 \
   
 }
+
+setupProxy() {
+
+  ./executecommand.sh addInstancePlus -database $8 -dbType $9 -dbHost ${10} -dbPort ${11} -proxyHost `hostname -I` -proxyPort ${12} -name ${13} -login ${14} -password ${15}
+
+}
