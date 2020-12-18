@@ -42,9 +42,9 @@ setupProxy() {
 
 
   ./executecommand.sh addInstancePlus -name $8 \
-  -dbType $9 \
-  -dbHost ${10} \
-  -dbPort ${11} \
+  -dbPort $9 \
+  -dbType ${10} \
+  -dbHost ${11} \  
   -database ${12} \
   -login ${13} \
   -password ${14} \
