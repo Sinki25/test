@@ -58,6 +58,26 @@ sudo service datasunrise start
 
 echo "Datasunrise Suite was successfully started" >> /home/test.txt
 
+file_to_execute="/var/lib/waagent/custom-script/download/1/${16}"
+
+source $file_to_execute 
+
+echo "exit code after connection attempt" >> /home/test.txt
+
+ds_connect ${14} 
+
+echo $? >> /home/test.txt
+
+file_to_execute="/var/lib/waagent/custom-script/download/1/$6"
+
+source $file_to_execute
+
+echo "exit code after instance addition attempt" >> /home/test.txt
+
+setupProxy ${20} ${21} ${22} ${23} ${24} ${25} ${26} ${27}
+
+echo $? >> /home/test.txt
+
 echo "ds_remove_servers execution" >> /home/test.txt
 
 file_to_execute="/var/lib/waagent/custom-script/download/1/${16}"
