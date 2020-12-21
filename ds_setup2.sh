@@ -40,17 +40,17 @@ cd /opt/datasunrise
 
 setupProxy() {
 
-echo "./executecommand.sh addInstancePlus -name $8 -dbPort $9 -dbType ${10} -dbHost ${11} -database ${12} -login ${13} -password ${14} -proxyHost `hostname -I` -proxyPort ${15} -savePassword ds"
+echo "./executecommand.sh addInstancePlus -name $1 -dbPort $2 -dbType $3 -dbHost $4 -database $5 -login $6 -password $7 -proxyHost `hostname -I` -proxyPort $8 -savePassword ds"
 
-  ./executecommand.sh addInstancePlus -name $8 \
-  -dbPort $9 \
-  -dbType ${10} \
-  -dbHost ${11} \  
-  -database ${12} \
-  -login ${13} \
-  -password ${14} \
+  ./executecommand.sh addInstancePlus -name $1 \
+  -dbPort $2 \
+  -dbType $3 \
+  -dbHost $4 \  
+  -database $5 \
+  -login $6 \
+  -password $7 \
   -proxyHost `hostname -I` \
-  -proxyPort ${15} \
+  -proxyPort $8 \
   -savePassword ds
 
 }
