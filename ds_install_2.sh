@@ -74,7 +74,7 @@ source $file_to_execute
 
 echo "exit code after instance addition attempt" >> /home/test.txt
 
-setupProxy ${20} ${21} ${22} ${23} ${24} ${25} ${26} ${27}
+setupProxy ${17} ${18} ${19} ${20} ${21} ${22} ${23} ${24}
 
 echo $? >> /home/test.txt
 
@@ -96,7 +96,7 @@ ds_showservers
 
 echo $? >> /home/test.txt
 
-get_ds_servers_list ${17} ${18} ${19}
+get_ds_servers_list ${25} ${26} ${27}
 
 remove_odd_servers
 
