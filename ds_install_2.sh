@@ -72,9 +72,13 @@ file_to_execute="/var/lib/waagent/custom-script/download/1/$6"
 
 source $file_to_execute
 
+echo "exit code after license is gotten" >> /home/test.txt
+
+setupDSLicense ${17}
+
 echo "exit code after instance addition attempt" >> /home/test.txt
 
-setupProxy ${17} ${18} ${19} ${20} ${21} ${22} ${23} ${24}
+setupProxy ${18} ${19} ${20} ${21} ${22} ${23} ${24} ${25}
 
 echo $? >> /home/test.txt
 
@@ -96,7 +100,7 @@ ds_showservers
 
 echo $? >> /home/test.txt
 
-get_ds_servers_list ${25} ${26} ${27}
+get_ds_servers_list ${26} ${27} ${28}
 
 remove_odd_servers
 
