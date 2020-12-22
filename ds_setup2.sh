@@ -56,6 +56,6 @@ setupDSLicense() {
   
   sudo mv /tmp/appfirewall.reg /opt/datasunrise/
   
-  
+  sudo chown datasunrise:datasunrise -R /opt/datasunrise/
 
 }
