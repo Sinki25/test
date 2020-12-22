@@ -59,3 +59,17 @@ setupDSLicense() {
   sudo chown datasunrise:datasunrise -R /opt/datasunrise/
 
 }
+
+setDictionaryLicense() {
+
+  dsversion=`/opt/datasunrise/AppBackendService VERSION`
+  
+  if [ '6.3.1.99999' = "`echo -e "6.3.1.99999\n$dsversion" | sort -V | head -n1`" ] ; then
+                        
+    echo "DS version $dsversion" >> /home/test.txt 
+    
+    sudo /opt/datasunrise/AppBackendService IMPORT_LICENSE_FROM_FILE=/opt/datasunrise/appfirewall.reg
+                  
+  fi
+ 
+}
