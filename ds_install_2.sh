@@ -76,6 +76,8 @@ echo "exit code after license is gotten" >> /home/test.txt
 
 setupDSLicense ${17}
 
+echo $? >> /home/test.txt
+
 echo "exit code after instance addition attempt" >> /home/test.txt
 
 setupProxy ${18} ${19} ${20} ${21} ${22} ${23} ${24} ${25}
