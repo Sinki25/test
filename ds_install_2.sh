@@ -4,15 +4,15 @@ echo "Install_libraries execution" >> /home/test.txt
 
 file_to_execute="./$1"
 
-$file_to_execute $2 $3 
+$file_to_execute $2  
 
 echo "Pre_setup execution" >> /home/test.txt
 
-file_to_execute="./$4"
+file_to_execute="./$3"
 
 source $file_to_execute 
 
-install_product $5
+install_product $4
 
 echo $? >> /home/test.txt
 
@@ -30,11 +30,11 @@ echo "Exit code after installation" >> /home/test.txt
 
 echo "Ds_setup execution" >> /home/test.txt
 
-file_to_execute="./$6"
+file_to_execute="./$5"
 
 source $file_to_execute 
 
-resetDict $7 $8 $9 ${10} ${11} ${12} ${13}
+resetDict $6 $7 $8 $9 ${10} ${11} ${12}
 
 RETVAL=$?
 
@@ -44,11 +44,11 @@ echo "Exit code after dictionary configuration" >> /home/test.txt
 
 if [ "$RETVAL" == "93" ]; then
 
-  resetAdminPassword ${14}
+  resetAdminPassword ${13}
 
 fi
 
-resetAudit $8 $9 ${15} ${11} ${12}
+resetAudit $7 $8 ${14} ${10} ${11}
 
 echo $? >> /home/test.txt
 
@@ -58,23 +58,23 @@ sudo service datasunrise start
 
 echo "Datasunrise Suite was successfully started" >> /home/test.txt
 
-file_to_execute="/var/lib/waagent/custom-script/download/1/${16}"
+file_to_execute="/var/lib/waagent/custom-script/download/1/${15}"
 
 source $file_to_execute 
 
 echo "Exit code after connection attempt" >> /home/test.txt
 
-ds_connect ${14} 
+ds_connect ${13} 
 
 echo $? >> /home/test.txt
 
-file_to_execute="/var/lib/waagent/custom-script/download/1/$6"
+file_to_execute="/var/lib/waagent/custom-script/download/1/$5"
 
 source $file_to_execute
 
 echo "Exit code after license is gotten" >> /home/test.txt
 
-setupDSLicense ${17}
+setupDSLicense ${16}
 
 echo $? >> /home/test.txt
 
@@ -86,19 +86,19 @@ echo $? >> /home/test.txt
 
 echo "Exit code after instance addition attempt" >> /home/test.txt
 
-setupProxy ${18} ${19} ${20} ${21} ${22} ${23} ${24} ${25}
+setupProxy ${17} ${18} ${19} ${20} ${21} ${22} ${23} ${24}
 
 echo $? >> /home/test.txt
 
 echo "Ds_remove_servers execution" >> /home/test.txt
 
-file_to_execute="/var/lib/waagent/custom-script/download/1/${16}"
+file_to_execute="/var/lib/waagent/custom-script/download/1/${15}"
 
 source $file_to_execute 
 
 echo "Exit code after connection attempt" >> /home/test.txt
 
-ds_connect ${14} 
+ds_connect ${13} 
 
 echo $? >> /home/test.txt 
 
@@ -108,7 +108,7 @@ ds_showservers
 
 echo $? >> /home/test.txt
 
-get_ds_servers_list ${26} ${27} ${28}
+get_ds_servers_list ${25} ${26} ${27}
 
 remove_odd_servers
 
