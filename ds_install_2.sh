@@ -101,6 +101,16 @@ checkInstanceExists $ds_root
 
 echo $instanceExists
 
+if [ "$instanceExists" == "0" ]; then
+                  logBeginAct "Create proxy..."
+                  setupProxy
+                  setupCleaningTask
+              else
+                  logBeginAct "Copy proxy..."
+                  copyProxies
+                  runCleaningTask
+              fi
+
 if [ "$RETVAL" == "93" ]; then
 
   ds_connect $ds_admin_password 
