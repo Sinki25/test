@@ -20,7 +20,13 @@ resetDict() {
 
 resetAdminPassword() {
 
+  logBeginAct "Reset Admin Password..."
+
    ./AppBackendService SET_ADMIN_PASSWORD=$1
+   
+   RETVAL1=$?
+   
+   logEndAct "Reset DS Admin Password result - $RETVAL1"
   
  }
 
