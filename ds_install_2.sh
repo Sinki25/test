@@ -1,18 +1,24 @@
-echo "Datasunrise installation script has been started"
-
-echo "Install_libraries execution" >> /home/test.txt
-
 file_to_execute="./$1"
-
-$file_to_execute $2  
-
-echo "Pre_setup execution" >> /home/test.txt
-
-file_to_execute="./$3"
 
 source $file_to_execute 
 
-install_product $4
+logBeginAct "Datasunrise installation script has been started"
+
+logEndAct "Install_libraries execution result - $RETVAL"
+
+echo "Install_libraries execution" >> /home/test.txt
+
+file_to_execute="./$2"
+
+$file_to_execute $3  
+
+echo "Pre_setup execution" >> /home/test.txt
+
+file_to_execute="./$4"
+
+source $file_to_execute 
+
+install_product $5
 
 echo $? >> /home/test.txt
 
@@ -30,11 +36,11 @@ echo "Exit code after installation" >> /home/test.txt
 
 echo "Ds_setup execution" >> /home/test.txt
 
-file_to_execute="./$5"
+file_to_execute="./$6"
 
 source $file_to_execute 
 
-resetDict $6 $7 $8 $9 ${10} ${11} ${12}
+resetDict $7 $8 $9 ${10} ${11} ${12} ${13}
 
 RETVAL=$?
 
@@ -44,11 +50,11 @@ echo "Exit code after dictionary configuration" >> /home/test.txt
 
 if [ "$RETVAL" == "93" ]; then
 
-  resetAdminPassword ${13}
+  resetAdminPassword ${14}
 
 fi
 
-resetAudit $7 $8 ${14} ${10} ${11}
+resetAudit $8 $9 ${15} ${11} ${12}
 
 echo $? >> /home/test.txt
 
@@ -58,23 +64,23 @@ sudo service datasunrise start
 
 echo "Datasunrise Suite was successfully started" >> /home/test.txt
 
-file_to_execute="/var/lib/waagent/custom-script/download/1/${15}"
+file_to_execute="/var/lib/waagent/custom-script/download/1/${16}"
 
 source $file_to_execute 
 
 echo "Exit code after connection attempt" >> /home/test.txt
 
-ds_connect ${13} 
+ds_connect ${14} 
 
 echo $? >> /home/test.txt
 
-file_to_execute="/var/lib/waagent/custom-script/download/1/$5"
+file_to_execute="/var/lib/waagent/custom-script/download/1/$6"
 
 source $file_to_execute
 
 echo "Exit code after license is gotten" >> /home/test.txt
 
-setupDSLicense ${16}
+setupDSLicense ${17}
 
 echo $? >> /home/test.txt
 
@@ -86,19 +92,19 @@ echo $? >> /home/test.txt
 
 echo "Exit code after instance addition attempt" >> /home/test.txt
 
-setupProxy ${17} ${18} ${19} ${20} ${21} ${22} ${23} ${24}
+setupProxy ${18} ${19} ${20} ${21} ${22} ${23} ${24} ${25}
 
 echo $? >> /home/test.txt
 
 echo "Ds_remove_servers execution" >> /home/test.txt
 
-file_to_execute="/var/lib/waagent/custom-script/download/1/${15}"
+file_to_execute="/var/lib/waagent/custom-script/download/1/${16}"
 
 source $file_to_execute 
 
 echo "Exit code after connection attempt" >> /home/test.txt
 
-ds_connect ${13} 
+ds_connect ${14} 
 
 echo $? >> /home/test.txt 
 
@@ -108,7 +114,7 @@ ds_showservers
 
 echo $? >> /home/test.txt
 
-get_ds_servers_list ${25} ${26} ${27}
+get_ds_servers_list ${26} ${27} ${28}
 
 remove_odd_servers
 
