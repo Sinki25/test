@@ -77,3 +77,19 @@ setDictionaryLicense() {
   fi
  
 }
+
+checkInstanceExists() {
+
+  instanceExists=
+  
+  instances=`$1/cmdline/executecommand.sh showInstances`;
+  
+  if [[ "$instances" == "No Instances" ]]; then
+    instanceExists=0
+    logEndAct "No instances found. Will create new."
+  else
+    instanceExists=1
+    logEndAct "Instances found. Will copy."
+  fi;
+
+}
