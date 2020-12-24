@@ -11,7 +11,7 @@ sudo yum install azure-cli -y
 
 echo "Azure CLI was successfully installed" >> /home/test.txt
 
-az login --identity -u $1
+az login --identity -u $identity
 
 echo "Azure successful login" >> /home/test.txt
 
