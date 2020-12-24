@@ -93,6 +93,14 @@ sudo service datasunrise start
 
 logBeginAct "Datasunrise Suite was successfully started"
 
+logBeginAct "Checking existing instances..."
+                    
+ds_connect $ds_admin_password
+
+checkInstanceExists $ds_root 
+
+echo $instanceExists
+
 if [ "$RETVAL" == "93" ]; then
 
   ds_connect $ds_admin_password 
