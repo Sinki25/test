@@ -64,37 +64,41 @@ sudo service datasunrise start
 
 echo "Datasunrise Suite was successfully started" >> /home/test.txt
 
-file_to_execute="/var/lib/waagent/custom-script/download/1/${16}"
+if [ "$RETVAL" == "93" ]; then
 
-source $file_to_execute 
+  file_to_execute="/var/lib/waagent/custom-script/download/1/${16}"
 
-echo "Exit code after connection attempt" >> /home/test.txt
+  source $file_to_execute 
 
-ds_connect ${14} 
+  echo "Exit code after connection attempt" >> /home/test.txt
 
-echo $? >> /home/test.txt
+  ds_connect ${14} 
 
-file_to_execute="/var/lib/waagent/custom-script/download/1/$6"
+  echo $? >> /home/test.txt
 
-source $file_to_execute
+  file_to_execute="/var/lib/waagent/custom-script/download/1/$6"
 
-echo "Exit code after license is gotten" >> /home/test.txt
+  source $file_to_execute
 
-setupDSLicense ${17}
+  echo "Exit code after license is gotten" >> /home/test.txt
 
-echo $? >> /home/test.txt
+  setupDSLicense ${17}
 
-echo "Exit code after license is set" >> /home/test.txt
+  echo $? >> /home/test.txt
 
-setDictionaryLicense
+  echo "Exit code after license is set" >> /home/test.txt
 
-echo $? >> /home/test.txt
+  setDictionaryLicense
 
-echo "Exit code after instance addition attempt" >> /home/test.txt
+  echo $? >> /home/test.txt
 
-setupProxy ${18} ${19} ${20} ${21} ${22} ${23} ${24} ${25}
+  echo "Exit code after instance addition attempt" >> /home/test.txt
 
-echo $? >> /home/test.txt
+  setupProxy ${18} ${19} ${20} ${21} ${22} ${23} ${24} ${25}
+
+  echo $? >> /home/test.txt
+  
+fi
 
 echo "Ds_remove_servers execution" >> /home/test.txt
 
