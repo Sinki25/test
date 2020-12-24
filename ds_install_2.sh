@@ -10,6 +10,8 @@ echo "Install_libraries execution" >> /home/test.txt
 
 file_to_execute="./$2"
 
+source $file_to_execute 
+
 identity=$3
 
 $file_to_execute  
