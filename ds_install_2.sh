@@ -26,6 +26,9 @@ target_proxy_port=${25}
 vm_count=${26}
 resource_group_name=${27}
 vm_scale_set_name=${28}
+ds_root='/opt/datasunrise'
+AF_HOME=$ds_root
+AF_CONFIG=$AF_HOME
 
 
 source $ds_params
@@ -64,7 +67,7 @@ logEndAct "Exit code after installation - $RETVAL"
 
 logBeginAct "DS_setup execution"
 
-resetDict $dictionary_type $ds_database_host $ds_database_port $dictionary_name $ds_database_login $ds_database_password $ds_server_name
+resetDict $ds_root $AF_HOME $dictionary_type $ds_database_host $ds_database_port $dictionary_name $ds_database_login $ds_database_password $ds_server_name
 
 RETVAL=$?
 
@@ -72,7 +75,7 @@ logEndAct "Exit code after dictionary configuration - $RETVAL"
 
 if [ "$RETVAL" == "93" ]; then
 
-  resetAdminPassword $ds_admin_password
+  resetAdminPassword $ds_root $AF_HOME $ds_admin_password
 
 fi
 
@@ -80,7 +83,7 @@ RETVAL1=$?
 
 logEndAct "Exit code after admin password is changed - $RETVAL1"
 
-resetAudit $ds_database_host $ds_database_port $audit_name $ds_database_login $ds_database_password
+resetAudit $ds_root $AF_HOME $ds_database_host $ds_database_port $audit_name $ds_database_login $ds_database_password
 
 RETVAL1=$?
 
@@ -104,7 +107,7 @@ if [ "$RETVAL" == "93" ]; then
 
   logEndAct "Exit code after license is gotten - $RETVAL1"
   
-  setDictionaryLicense
+  setDictionaryLicense $ds_root $AF_HOME
   
   RETVAL1=$?
 
