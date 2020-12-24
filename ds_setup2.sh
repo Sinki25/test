@@ -2,14 +2,14 @@ resetDict() {
 
   cd /opt/datasunrise
 
-  ./AppBackendService CLEAN_LOCAL_SETTINGS \
-  DICTIONARY_TYPE=$1 \
-  DICTIONARY_HOST=$2 \
-  DICTIONARY_PORT=$3 \
-  DICTIONARY_DB_NAME=$4 \
-  DICTIONARY_LOGIN=$5 \
-  DICTIONARY_PASS=$6 \
-  FIREWALL_SERVER_NAME=$7'-'`hostname` \
+  sudo LD_LIBRARY_PATH="$1":"$1/lib":$LD_LIBRARY_PATH AF_HOME="$2" AF_CONFIG="$2" $1/AppBackendService CLEAN_LOCAL_SETTINGS \
+  DICTIONARY_TYPE=$3 \
+  DICTIONARY_HOST=$4 \
+  DICTIONARY_PORT=$5 \
+  DICTIONARY_DB_NAME=$6 \
+  DICTIONARY_LOGIN=$7 \
+  DICTIONARY_PASS=$8 \
+  FIREWALL_SERVER_NAME=$9'-'`hostname` \
   FIREWALL_SERVER_HOST=`hostname` \
   FIREWALL_SERVER_BACKEND_PORT=11000 \
   FIREWALL_SERVER_CORE_PORT=11001 \
@@ -22,7 +22,7 @@ resetAdminPassword() {
 
   logBeginAct "Reset Admin Password..."
 
-   ./AppBackendService SET_ADMIN_PASSWORD=$1
+   sudo LD_LIBRARY_PATH="$1":"$1/lib":$LD_LIBRARY_PATH AF_HOME="$2" AF_CONFIG="$2" $1/AppBackendService SET_ADMIN_PASSWORD=$3
    
    RETVAL1=$?
    
@@ -34,13 +34,13 @@ resetAudit() {
 
 cd /opt/datasunrise
 
-  ./AppBackendService CHANGE_SETTINGS \
+  sudo LD_LIBRARY_PATH="$1":"$1/lib":$LD_LIBRARY_PATH AF_HOME="$2" AF_CONFIG="$2" $1/AppBackendService CHANGE_SETTINGS \
   AuditDatabaseType=1 \
-  AuditDatabaseHost=$1 \
-  AuditDatabasePort=$2 \
-  AuditDatabaseName=$3 \
-  AuditLogin=$4 \
-  AuditPassword=$5 \
+  AuditDatabaseHost=$3 \
+  AuditDatabasePort=$4 \
+  AuditDatabaseName=$5 \
+  AuditLogin=$6 \
+  AuditPassword=$7 \
   
 }
 
@@ -72,7 +72,7 @@ setDictionaryLicense() {
                         
     echo "DS version $dsversion" >> /home/test.txt 
     
-    sudo /opt/datasunrise/AppBackendService IMPORT_LICENSE_FROM_FILE=/opt/datasunrise/appfirewall.reg
+    sudo LD_LIBRARY_PATH="$1":"$1/lib":$LD_LIBRARY_PATH AF_HOME="$2" AF_CONFIG="$2" $1/AppBackendService IMPORT_LICENSE_FROM_FILE=/opt/datasunrise/appfirewall.reg
                   
   fi
  
