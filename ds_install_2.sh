@@ -10,7 +10,9 @@ echo "Install_libraries execution" >> /home/test.txt
 
 file_to_execute="./$2"
 
-$file_to_execute $3  
+identity=$3
+
+$file_to_execute  
 
 echo "Pre_setup execution" >> /home/test.txt
 
