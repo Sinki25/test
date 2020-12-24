@@ -1,32 +1,56 @@
-file_to_execute="./$1"
+ds_params="./$1"
+install_libraries="./$2"
+identity=$3
+pre_setup="./$4"
+link_to_DS_build=$5
+ds_setup="./$6"
+dictionary_type=$7
+ds_database_host=$8
+ds_database_port=$9
+dictionary_name=${10}
+ds_database_login=${11}
+ds_database_password=${12}
+ds_server_name=${13}
+ds_admin_password=${14}
+audit_name=${15}
+ds_remove_servers="/var/lib/waagent/custom-script/download/1/${16}"
+ds_license=${17}
+instance_name=${18}
+target_db_port=${19}
+target_db_type=${20}
+target_db_host=${21}
+target_database=${22}
+target_db_login=${23}
+target_db_password=${24}
+target_proxy_port=${25}
+vm_count=${26}
+resource_group_name=${27}
+vm_scale_set_name=${28}
 
-source $file_to_execute 
+
+source $ds_params
+source $install_libraries
+source $pre_setup
+source $ds_setup
+source $ds_remove_servers
 
 logBeginAct "Datasunrise installation script has been started"
 
-logEndAct "Install_libraries execution result - $RETVAL"
+logBeginAct "Install_libraries execution"
 
-echo "Install_libraries execution" >> /home/test.txt
+$install_libraries $identity
 
-file_to_execute="./$2"
+RETVAL=$?
 
-source $file_to_execute 
+logEndAct "Install_libraries execution result - $RETVAL" 
 
-identity=$3
+logBeginAct "Pre_setup execution"
 
-$file_to_execute  
+install_product $link_to_DS_build
 
-echo "Pre_setup execution" >> /home/test.txt
+RETVAL=$?
 
-file_to_execute="./$4"
-
-source $file_to_execute 
-
-install_product $5
-
-echo $? >> /home/test.txt
-
-echo "Exit code after installation" >> /home/test.txt
+logEndAct "Exit code after installation - $RETVAL"
 
 #curl https://packages.microsoft.com/config/rhel/8/prod.repo > /etc/yum.repos.d/mssql-release.repo
 
@@ -38,92 +62,78 @@ echo "Exit code after installation" >> /home/test.txt
 
 #echo "mssql driver was updated successfully" >> /home/test.txt
 
-echo "Ds_setup execution" >> /home/test.txt
+logBeginAct "DS_setup execution"
 
-file_to_execute="./$6"
-
-source $file_to_execute 
-
-resetDict $7 $8 $9 ${10} ${11} ${12} ${13}
+resetDict $dictionary_type $ds_database_host $ds_database_port $dictionary_name $ds_database_login $ds_database_password $ds_server_name
 
 RETVAL=$?
 
-echo $? >> /home/test.txt
-
-echo "Exit code after dictionary configuration" >> /home/test.txt
+logEndAct "Exit code after dictionary configuration - $RETVAL"
 
 if [ "$RETVAL" == "93" ]; then
 
-  resetAdminPassword ${14}
+  resetAdminPassword $ds_admin_password
 
 fi
 
-resetAudit $8 $9 ${15} ${11} ${12}
+RETVAL1=$?
 
-echo $? >> /home/test.txt
+logEndAct "Exit code after admin password is changed - $RETVAL1"
 
-echo "Exit code after audit configuration" >> /home/test.txt
+resetAudit $ds_database_host $ds_database_port $audit_name $ds_database_login $ds_database_password
+
+RETVAL1=$?
+
+logEndAct "Exit code after audit configuration - $RETVAL1"
 
 sudo service datasunrise start
 
-echo "Datasunrise Suite was successfully started" >> /home/test.txt
+logBeginAct "Datasunrise Suite was successfully started"
 
 if [ "$RETVAL" == "93" ]; then
 
-  file_to_execute="/var/lib/waagent/custom-script/download/1/${16}"
+  ds_connect $ds_admin_password 
+  
+  RETVAL1=$?
 
-  source $file_to_execute 
+  logEndAct "Exit code after connection attempt - $RETVAL1"
+  
+  setupDSLicense $ds_license
+  
+  RETVAL1=$?
 
-  echo "Exit code after connection attempt" >> /home/test.txt
-
-  ds_connect ${14} 
-
-  echo $? >> /home/test.txt
-
-  file_to_execute="/var/lib/waagent/custom-script/download/1/$6"
-
-  source $file_to_execute
-
-  echo "Exit code after license is gotten" >> /home/test.txt
-
-  setupDSLicense ${17}
-
-  echo $? >> /home/test.txt
-
-  echo "Exit code after license is set" >> /home/test.txt
-
+  logEndAct "Exit code after license is gotten - $RETVAL1"
+  
   setDictionaryLicense
+  
+  RETVAL1=$?
 
-  echo $? >> /home/test.txt
+  logEndAct "Exit code after license is set - $RETVAL1"
+  
+  setupProxy $instance_name $target_db_port $target_db_type $target_db_host $target_database $target_db_login $target_db_password $target_proxy_port
+  
+  RETVAL1=$?
 
-  echo "Exit code after instance addition attempt" >> /home/test.txt
-
-  setupProxy ${18} ${19} ${20} ${21} ${22} ${23} ${24} ${25}
-
-  echo $? >> /home/test.txt
+  logEndAct "Exit code after instance addition attempt - $RETVAL1"
   
 fi
 
-echo "Ds_remove_servers execution" >> /home/test.txt
+logBeginAct "DS_remove_servers execution"
 
-file_to_execute="/var/lib/waagent/custom-script/download/1/${16}"
+ds_connect $ds_admin_password
 
-source $file_to_execute 
+RETVAL1=$?
 
-echo "Exit code after connection attempt" >> /home/test.txt
+logEndAct "Exit code after connection attempt - $RETVAL1"
 
-ds_connect ${14} 
+ds_showservers
 
-echo $? >> /home/test.txt 
+RETVAL1=$?
 
-echo "Exit code after showDsServers" >> /home/test.txt
+logEndAct "Exit code after showDsServers - $RETVAL1"
 
-ds_showservers 
-
-echo $? >> /home/test.txt
-
-get_ds_servers_list ${26} ${27} ${28}
+get_ds_servers_list $vm_count $resource_group_name $vm_scale_set_name
 
 remove_odd_servers
 
-echo "The odd servers were successfully removed" >> /home/test.txt
+logBeginAct "The odd servers were successfully removed"
