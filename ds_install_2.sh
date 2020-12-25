@@ -127,7 +127,7 @@ if [ "$instanceExists" == "0" ]; then
 else
   
  logBeginAct "Copy proxy..."
- #copyProxies
+ copyProxies $ds_root $AF_HOME
  #runCleaningTask
 
 fi
