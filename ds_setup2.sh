@@ -90,6 +90,6 @@ checkInstanceExists() {
   else
     instanceExists=1
     logEndAct "Instances found. Will copy."
-  fi;
+  fi
 
 }
