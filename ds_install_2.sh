@@ -118,19 +118,19 @@ checkInstanceExists $ds_root
 
 echo $instanceExists
 
-#if [ "$instanceExists" == "0" ]; then
+if [ "$instanceExists" == "0" ]; then
   
- # logBeginAct "Create proxy..."
-  #setupProxy $instance_name $target_db_port $target_db_type $target_db_host $target_database $target_db_login $target_db_password $target_proxy_port
-  #setupCleaningTask
+ logBeginAct "Create proxy..."
+ setupProxy $instance_name $target_db_port $target_db_type $target_db_host $target_database $target_db_login $target_db_password $target_proxy_port
+ setupCleaningTask
   
-#else
+else
   
- # logBeginAct "Copy proxy..."
-  #copyProxies
-  #runCleaningTask
+ logBeginAct "Copy proxy..."
+ copyProxies
+ runCleaningTask
 
-#fi
+fi
 
 logBeginAct "DS_remove_servers execution"
 
