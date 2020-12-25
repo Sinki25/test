@@ -32,7 +32,6 @@ AF_CONFIG=$AF_HOME
 
 
 source $ds_params
-source $install_libraries
 source $pre_setup
 source $ds_setup
 source $ds_remove_servers
@@ -80,12 +79,12 @@ logEndAct "Exit code after dictionary configuration - $RETVAL"
 if [ "$RETVAL" == "93" ]; then
 
   resetAdminPassword $ds_root $AF_HOME $ds_admin_password
+  
+  RETVAL1=$?
+
+  logEndAct "Exit code after admin password is changed - $RETVAL1"
 
 fi
-
-RETVAL1=$?
-
-logEndAct "Exit code after admin password is changed - $RETVAL1"
 
 resetAudit $ds_root $AF_HOME $ds_database_host $ds_database_port $audit_name $ds_database_login $ds_database_password
 
@@ -119,19 +118,19 @@ checkInstanceExists $ds_root
 
 echo $instanceExists
 
-if [ "$instanceExists" == "0" ]; then
+#if [ "$instanceExists" == "0" ]; then
   
-  logBeginAct "Create proxy..."
-  setupProxy $instance_name $target_db_port $target_db_type $target_db_host $target_database $target_db_login $target_db_password $target_proxy_port
+ # logBeginAct "Create proxy..."
+  #setupProxy $instance_name $target_db_port $target_db_type $target_db_host $target_database $target_db_login $target_db_password $target_proxy_port
   #setupCleaningTask
   
-else
+#else
   
-  logBeginAct "Copy proxy..."
+ # logBeginAct "Copy proxy..."
   #copyProxies
   #runCleaningTask
 
-fi
+#fi
 
 logBeginAct "DS_remove_servers execution"
 
