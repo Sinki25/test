@@ -93,50 +93,40 @@ sudo service datasunrise start
 
 logBeginAct "Datasunrise Suite was successfully started"
 
-logBeginAct "Checking existing instances..."
-                    
+logBeginAct "Setting up license..."
+
 ds_connect $ds_admin_password
+
+setupDSLicense $ds_license
+  
+RETVAL1=$?
+
+logEndAct "Exit code after license is gotten - $RETVAL1"
+
+setDictionaryLicense $ds_root $AF_HOME
+  
+RETVAL1=$?
+
+logEndAct "Exit code after license is set - $RETVAL1"
+
+logBeginAct "Checking existing instances..."
 
 checkInstanceExists $ds_root 
 
 echo $instanceExists
 
 if [ "$instanceExists" == "0" ]; then
-                  logBeginAct "Create proxy..."
-                  setupProxy
-                  setupCleaningTask
-              else
-                  logBeginAct "Copy proxy..."
-                  copyProxies
-                  runCleaningTask
-              fi
-
-if [ "$RETVAL" == "93" ]; then
-
-  ds_connect $ds_admin_password 
   
-  RETVAL1=$?
-
-  logEndAct "Exit code after connection attempt - $RETVAL1"
-  
-  setupDSLicense $ds_license
-  
-  RETVAL1=$?
-
-  logEndAct "Exit code after license is gotten - $RETVAL1"
-  
-  setDictionaryLicense $ds_root $AF_HOME
-  
-  RETVAL1=$?
-
-  logEndAct "Exit code after license is set - $RETVAL1"
-  
+  logBeginAct "Create proxy..."
   setupProxy $instance_name $target_db_port $target_db_type $target_db_host $target_database $target_db_login $target_db_password $target_proxy_port
+  #setupCleaningTask
   
-  RETVAL1=$?
+else
+  
+  logBeginAct "Copy proxy..."
+  #copyProxies
+  #runCleaningTask
 
-  logEndAct "Exit code after instance addition attempt - $RETVAL1"
-  
 fi
 
 logBeginAct "DS_remove_servers execution"
