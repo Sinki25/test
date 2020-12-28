@@ -29,6 +29,6 @@ logBeginAct "unixODBC install OK"
 
 curl https://packages.microsoft.com/config/rhel/8/prod.repo > /etc/yum.repos.d/mssql-release.repo
 
-sudo ACCEPT_EULA=Y yum install msodbcsql17
+sudo ACCEPT_EULA=Y yum install msodbcsql17 -y
 
 logBeginAct "mssqlODBCdriver install OK"
