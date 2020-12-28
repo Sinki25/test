@@ -26,3 +26,9 @@ sudo yum install java-1.8.0-openjdk -y
 sudo yum install unixODBC -y
 
 echo "unixODBC install OK" >> /home/test.txt 
+
+curl https://packages.microsoft.com/config/rhel/8/prod.repo > /etc/yum.repos.d/mssql-release.repo
+
+sudo ACCEPT_EULA=Y yum install msodbcsql17
+
+echo "mssqlODBCdriver install OK" >> /home/test.txt 
