@@ -48,13 +48,15 @@ setupProxy() {
 
   cd /opt/datasunrise/cmdline
 
-  ./executecommand.sh addInstancePlus -name $1 -dbPort $2 -dbType $3 -dbHost $4 -database $5 -login $6 -password $7 -proxyHost `hostname -I` -proxyPort $8 -savePassword ds
-
+  ./executecommand.sh addInstancePlus -name $1 -dbPort $2 -dbType $3 -dbHost $4 -database $5 -login $6 -password $7 -proxyHost `hostname -I` -proxyPort $8 -savePassword ds 
+  
 }
 
 setupDSLicense() {
 
   touch /tmp/appfirewall.reg
+  
+  echo "$1"
 
   echo "$1" > /tmp/appfirewall.reg  
   
@@ -82,14 +84,35 @@ checkInstanceExists() {
 
   instanceExists=
   
-  instances=`$1/cmdline/executecommand.sh showInstances`;
+  for attempts in {1..60}
+  do
+    
+    instances=`$1/cmdline/executecommand.sh showInstances`
+    
+    if [[ "$instances" == "No Instances" ]]; then
+      
+      echo "No Instances, waiting..."
+      
+      sleep 6
+      
+      instanceExists=0
+    
+    else
+      
+      instanceExists=1 
   
-  if [[ "$instances" == "No Instances" ]]; then
-    instanceExists=0
+    fi
+  
+  done
+  
+  if [[ "$instanceExists" == 0 ]]; then
+  
     logEndAct "No instances found. Will create new."
+    
   else
-    instanceExists=1
+  
     logEndAct "Instances found. Will copy."
+    
   fi
 
 }
@@ -98,7 +121,7 @@ copyProxies() {
   
   logBeginAct "Copy proxy..."
   
-  for attempts in {1..100}
+  for attempts in {1..50}
   do
     
     instances=`$1/cmdline/executecommand.sh showInstances`
