@@ -92,10 +92,6 @@ RETVAL1=$?
 
 logEndAct "Exit code after audit configuration - $RETVAL1"
 
-sudo service datasunrise start
-
-logBeginAct "Datasunrise Suite was successfully started"
-
 logBeginAct "Setting up license..."
 
 ds_connect $ds_admin_password
@@ -113,6 +109,12 @@ setDictionaryLicense $ds_root $AF_HOME
 RETVAL1=$?
 
 logEndAct "Exit code after license is set - $RETVAL1"
+
+sudo service datasunrise start
+
+sleep 20
+
+logBeginAct "Datasunrise Suite was successfully started"
 
 logBeginAct "Checking existing instances..."
 
