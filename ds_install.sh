@@ -116,6 +116,8 @@ sleep 20
 
 logBeginAct "Datasunrise Suite was successfully started"
 
+ds_connect $ds_admin_password
+
 logBeginAct "Checking existing instances..."
 
 checkInstanceExists $ds_root 
