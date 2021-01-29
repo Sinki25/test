@@ -95,7 +95,7 @@ checkInstanceExists() {
       
       echo "$instances"
       
-      sleep 10
+      sleep 15
       
       instanceExists=0
     
