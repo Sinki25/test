@@ -92,6 +92,8 @@ RETVAL1=$?
 
 logEndAct "Exit code after audit configuration - $RETVAL1"
 
+sudo service datasunrise start
+
 logBeginAct "Setting up license..."
 
 ds_connect $ds_admin_password
