@@ -111,6 +111,10 @@ checkInstanceExists() {
   
     logEndAct "No instances found. Will create new."
     
+    instances=`$1/cmdline/executecommand.sh showInstances`
+    
+    echo "$instances"
+    
   else
   
     logEndAct "Instances found. Will copy."
