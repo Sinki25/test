@@ -40,10 +40,6 @@ logBeginAct "Datasunrise installation script has been started"
 
 logBeginAct "Install_libraries execution"
 
-echo "3 $3"
-
-echo $identity
-
 $install_libraries $identity
 
 RETVAL=$?
