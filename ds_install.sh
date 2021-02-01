@@ -110,9 +110,9 @@ RETVAL1=$?
 
 logEndAct "Exit code after license is set - $RETVAL1"
 
-#sudo service datasunrise start
+sudo service datasunrise start
 
-#sleep 30
+sleep 30
 
 logBeginAct "Datasunrise Suite was successfully started"
 
