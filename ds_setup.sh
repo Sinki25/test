@@ -84,7 +84,7 @@ checkInstanceExists() {
 
   instanceExists=
   
-  for attempts in {1..120}
+  for attempts in {1..100}
   do
     
     instances=`$1/cmdline/executecommand.sh showInstances`
@@ -95,7 +95,7 @@ checkInstanceExists() {
       
       echo "$instances"
       
-      sleep 15
+      sleep 20
       
       instanceExists=0
     
