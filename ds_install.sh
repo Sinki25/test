@@ -118,6 +118,12 @@ logBeginAct "Datasunrise Suite was successfully started"
 
 ds_connect $ds_admin_password
 
+if [ "$RETVAL" == "93" ]; then
+
+  sleep 100
+  
+fi
+
 logBeginAct "Checking existing instances..."
 
 checkInstanceExists $ds_root 
