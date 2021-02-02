@@ -118,9 +118,11 @@ logBeginAct "Datasunrise Suite was successfully started"
 
 ds_connect $ds_admin_password
 
+echo "$RETVAL"
+
 if [ "$RETVAL" == "93" ]; then
 
-  sleep 30
+  sleep 50
   
 fi
 
