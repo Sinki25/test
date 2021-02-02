@@ -90,7 +90,7 @@ logEndAct "Exit code after audit configuration - $RETVAL1"
 
 sudo service datasunrise start
 
-sleep 30
+sleep 20
 
 logBeginAct "Setting up license..."
 
@@ -112,7 +112,7 @@ logEndAct "Exit code after license is set - $RETVAL1"
 
 sudo service datasunrise start
 
-sleep 30
+sleep 20
 
 logBeginAct "Datasunrise Suite was successfully started"
 
@@ -120,7 +120,7 @@ ds_connect $ds_admin_password
 
 if [ "$RETVAL" == "93" ]; then
 
-  sleep 100
+  sleep 30
   
 fi
 
