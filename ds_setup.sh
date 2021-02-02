@@ -102,6 +102,8 @@ checkInstanceExists() {
     else
       
       instanceExists=1 
+      
+      break
   
     fi
   
