@@ -35,14 +35,12 @@ logBeginAct "mssqlODBCdriver install OK"
 
 logBeginAct "Oracle ODBC driver installation"
 
-wget https://azureoracle.s3.us-east-2.amazonaws.com/instantclient-basic-linux.x64-12.1.0.2.0.zip -O /tmp/instantclient-basic-linux.x64-12.1.0.2.0.zip
+wget https://www.datasunrise.com/support-files/oracle-instantclient19.10-basic-19.10.0.0.0-1.x86_64.rpm -O oracle-instantclient19.10-basic-19.10.0.0.0-1.x86_64.rpm
 
-sudo unzip /tmp/instantclient-basic-linux.x64-12.1.0.2.0.zip -d /opt/
+rpm -i oracle-instantclient19.10-basic-19.10.0.0.0-1.x86_64.rpm
 
-cd /opt/instantclient_12_1
+cd /opt/oracle-instantclient19.10-basic-19.10.0.0.0-1
 
 sudo ln -s libclntsh.so.12.1 libclntsh.so
-
-rm -f /tmp/instantclient-basic-linux.x64-12.1.0.2.0.zip
 
 logBeginAct "Oracle ODBC driver install OK"
