@@ -112,8 +112,6 @@ logEndAct "Exit code after license is set - $RETVAL1"
 
 sudo service datasunrise start
 
-sleep 20
-
 logBeginAct "Datasunrise Suite was successfully started"
 
 ds_connect $ds_admin_password
