@@ -120,7 +120,7 @@ echo "$RETVAL"
 
 if [ "$RETVAL" == "93" ]; then
 
-  sleep 79
+  sleep 78
   
 fi
 
