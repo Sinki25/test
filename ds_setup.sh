@@ -48,6 +48,8 @@ setupProxy() {
 
   cd /opt/datasunrise/cmdline
   
+  xtra_args=
+  
   if [ "$3" = "oracle" ]; then
     xtra_args="-instance $5"
     
