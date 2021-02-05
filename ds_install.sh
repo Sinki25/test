@@ -126,7 +126,7 @@ fi
 
 logBeginAct "Checking existing instances..."
 
-if [ "$RETVAL" =! "93" ]; then
+if [ "$RETVAL" != "93" ]; then
 
   #checkInstanceExists $ds_root 
 
