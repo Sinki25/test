@@ -8,6 +8,7 @@ logSeparator() {
 
 log() {
   echo -ne "$INST_CAPT: $@\n"
+  echo `date +"%T"`
 }
 
 logBeginAct() {
