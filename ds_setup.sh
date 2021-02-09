@@ -60,7 +60,9 @@ setupProxy() {
       
   fi
 
-  ./executecommand.sh addInstancePlus -name $1 $xtra_args -dbPort $2 -dbType $3 -dbHost $4 -database $5 -login $6 -password $7 -proxyHost `hostname -I` -proxyPort $8 -savePassword ds 
+  ./executecommand.sh addInstancePlus -name $1 $xtra_args -dbPort $2 -dbType $3 -dbHost $4 -database $5 -login $6 -password $7 -proxyHost `hostname -I` -proxyPort $8 -savePassword ds
+  
+  sleep 20
   
 }
 
@@ -96,7 +98,7 @@ checkInstanceExists() {
 
   instanceExists=
   
-  for attempts in {1..50}
+  for attempts in {1..100}
   do
     
     instances=`$1/cmdline/executecommand.sh showInstances`
@@ -121,19 +123,6 @@ checkInstanceExists() {
   
   done
   
-  if [[ "$instanceExists" == 0 ]]; then
-  
-    logEndAct "No instances found. Will create new."
-    
-    instances=`$1/cmdline/executecommand.sh showInstances`
-    
-    echo "$instances"
-    
-  else
-  
-    logEndAct "Instances found. Will copy."
-    
-  fi
 
 }
 
