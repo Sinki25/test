@@ -118,25 +118,25 @@ ds_connect $ds_admin_password
 
 echo "$RETVAL"
 
-if [ "$RETVAL" == "93" ]; then
+#if [ "$RETVAL" == "93" ]; then
 
-  sleep 80
+  #sleep 80
   
-fi
+#fi
 
 logBeginAct "Checking existing instances..."
 
-if [ "$RETVAL" != "93" ]; then
+#if [ "$RETVAL" != "93" ]; then
 
-  #checkInstanceExists $ds_root 
+checkInstanceExists $ds_root 
 
-  #echo $instanceExists
+echo $instanceExists
 
-  #if [ "$instanceExists" == "0" ]; then
+if [ "$instanceExists" == "0" ]; then
   
-    #logBeginAct "Create proxy..."
-    ds_connect $ds_admin_password 
-    setupProxy $instance_name $target_db_port $target_db_type $target_db_host $target_database $target_db_login $target_db_password $target_proxy_port
+ logBeginAct "Create proxy..."
+ ds_connect $ds_admin_password 
+ setupProxy $instance_name $target_db_port $target_db_type $target_db_host $target_database $target_db_login $target_db_password $target_proxy_port
  #setupCleaningTask
   
 else
