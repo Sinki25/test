@@ -128,7 +128,7 @@ logBeginAct "Checking existing instances..."
 
 if [ "$RETVAL" != "93" ]; then
 
-  sleep 20
+  sleep 80
   
 fi
 
