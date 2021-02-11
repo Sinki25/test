@@ -126,7 +126,11 @@ echo "$RETVAL"
 
 logBeginAct "Checking existing instances..."
 
-#if [ "$RETVAL" != "93" ]; then
+if [ "$RETVAL" != "93" ]; then
+
+  sleep 20
+  
+fi
 
 checkInstanceExists $ds_root 
 
